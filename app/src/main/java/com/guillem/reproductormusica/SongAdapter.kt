@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.guillem.reproductormusica.R
 import com.guillem.reproductormusica.Song
-import com.squareup.picasso.Picasso
 import java.io.Serializable
 
 class SongAdapter(private val songList : List<Song>) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
@@ -29,7 +28,7 @@ class SongAdapter(private val songList : List<Song>) : RecyclerView.Adapter<Song
 
 
     inner class ViewHolder(var itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var songName: ImageView = itemView.findViewById(R.id.songName)
+        var songName: TextView = itemView.findViewById(R.id.songName)
         var playButton: Button = itemView.findViewById(R.id.Play)
         var stopButton : Button = itemView.findViewById(R.id.Stop)
         var restartButton : Button = itemView.findViewById(R.id.Restart)
@@ -49,10 +48,7 @@ class SongAdapter(private val songList : List<Song>) : RecyclerView.Adapter<Song
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val song: Song = songList!!.get(position)
-        holder.songName.text = Song.songName;
-        Picasso.get().load(card.cardImages[0].imageUrl)
-            .placeholder(R.drawable.film_placeholder)
-            .into(holder.image)
+        holder.songName.text = song.songName;
 
     }
 
