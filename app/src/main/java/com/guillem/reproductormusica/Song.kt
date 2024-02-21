@@ -4,7 +4,7 @@ import android.media.Image
 
 data class Song (
     var songName : String,
-    var songPath : String,
+    var songPath : Int,
     var songImage : String,
 
 )

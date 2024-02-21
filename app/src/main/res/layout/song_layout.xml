@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="427dp"
+        android:layout_height="118dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:orientation="horizontal"
@@ -16,10 +16,11 @@
 
         <TextView
             android:id="@+id/songName"
-            android:layout_width="167dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="94dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/Play"
@@ -36,12 +37,9 @@
             android:text="Stop" />
 
 
-
-
-
         <Button
             android:id="@+id/Restart"
-            android:layout_width="wrap_content"
+            android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Restart" />
