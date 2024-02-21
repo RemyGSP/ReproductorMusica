@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         var songList = ArrayList<Song>()
-        val afterlife = Song("Afterlife", R.raw.stim_afterlife, "drawable")
-        val secondsFromPanic = Song("10 Seconds from panic", R.raw.secondsrompanic10, "drawable")
-        val mrBrightSide = Song("Mr.Brightside", R.raw.the_killers_mr_brightside, "drawable")
+        val afterlife = Song("Afterlife", R.raw.afterlife, R.drawable.afterlife)
+        val secondsFromPanic = Song("10 Seconds from panic", R.raw.secondsrompanic10, R.drawable.seconds_from_panic)
+        val mrBrightSide = Song("Mr.Brightside", R.raw.the_killers_mr_brightside, R.drawable.mrbrightside)
         songList.add(afterlife)
         songList.add(secondsFromPanic)
         songList.add(mrBrightSide)

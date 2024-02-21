@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.guillem.reproductormusica.R
@@ -20,12 +22,16 @@ import java.io.Serializable
 class SongAdapter(private val songList : List<Song>) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
 
 private lateinit var context : Context;
+    private  var currentSong : Int = 0;
     inner class ViewHolder(var itemView: View) : RecyclerView.ViewHolder(itemView) {
         var songName: TextView = itemView.findViewById(R.id.songName)
+        var songImage: ImageView = itemView.findViewById(R.id.songImage)
         var playButton: Button = itemView.findViewById(R.id.Play)
         var stopButton : Button = itemView.findViewById(R.id.Stop)
         var restartButton : Button = itemView.findViewById(R.id.Restart)
-        }
+        var durationBar : SeekBar = itemView.findViewById(R.id.seekBar)
+        var durationText : TextView = itemView.findViewById(R.id.durationText)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -43,9 +49,14 @@ private lateinit var context : Context;
         Log.d("SongName",song.songName)
         val songName : TextView = holder.songName
         songName.text = song.songName
+        holder.songImage.setImageResource(song.songImage)
         holder.songName.text = song.songName;
         var playbackPosition: Int = 0
+        var durationBar = holder.durationBar
         val mediaPlayer = MediaPlayer.create(context, song.songPath)
+        durationBar.max = mediaPlayer.duration
+        val durationText = holder.durationText
+        durationText.text = "0:00"
         mediaPlayer.setVolume(1f,1f)
         holder.playButton.setOnClickListener {
             mediaPlayer?.apply {
@@ -60,6 +71,10 @@ private lateinit var context : Context;
                             mp.start()
                         }
                     } else {
+                        val minutes = mediaPlayer.currentPosition / 1000 / 60
+                        val seconds =  mediaPlayer.currentPosition / 1000 % 60
+                        val formattedTime = String.format("%02d:%02d", minutes, seconds)
+                        durationText.text = formattedTime
                         seekTo(playbackPosition)
                         start()
                     }
@@ -83,8 +98,29 @@ private lateinit var context : Context;
                 start()
             }
         }
-        }
+
+        holder.durationBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                mediaPlayer.seekTo(progress)
+                playbackPosition = progress
+                val minutes = playbackPosition / 1000 / 60
+                val seconds = playbackPosition / 1000 % 60
+                val formattedTime = String.format("%02d:%02d", minutes, seconds)
+                durationText.text = formattedTime
+            }
+
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // you can probably leave this empty
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // you can probably leave this empty
+            }
+        })
+
     }
+}
 
 
 
